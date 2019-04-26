@@ -1,0 +1,8 @@
+<!--   time:2019-04-21 23:06:41 -->
+<view class="assembly-container">
+	<view class="assembly" style="width:{{room_num*170}}rpx">
+		<block wx:for="{{rooms}}" wx:for-item="room" wx:for-index="index" >
+			<view bindtap="selected" class="{{roomid==room.id?'active':''}}" data-id="{{room.id}}">{{room.title}}</view>
+		</block>
+	</view>
+</view>

@@ -1,0 +1,4 @@
+<!--   time:2019-04-21 23:06:40 -->
+<view style="background:{{diyitem.style.background}};padding:{{diyitem.style.padding}}rpx 0">
+	<view style="border-top:{{diyitem.style.height}}rpx {{diyitem.style.linestyle}} {{diyitem.style.bordercolor}}"></view>
+</view>

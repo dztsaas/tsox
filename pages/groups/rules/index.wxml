@@ -1,0 +1,10 @@
+<!--   time:2019-04-21 23:06:31 -->
+<view style="padding:0 24rpx">
+	<rich-text nodes="{{rules}}"></rich-text>
+	<block wx:if="{{!rule}}">
+		<view class="process">
+			<text class="icox icox-1"></text>下单开团/参团<text class="line">-----------</text>
+			<text class="icox icox-2"></text>邀请好友参团<text class="line">-----------</text>
+			<text class="icox icox-3"></text>人满拼团成功		</view>
+	</block>
+</view>

@@ -1,0 +1,43 @@
+<!--   time:2019-04-21 23:06:38 -->
+<view class="picker-modal {{gift?'in':'out'}} {{iphonexnavbar}}">
+	<view class="gift-picker">
+		<radio-group class="radio-group">
+			<view class="option-picker-inner gift-picker">
+				<view bindtap="emptyActive" class="gifttitle" style="{{goods.gifts.length==1?'margin-bottom:15rpx':''}}">{{goods.gifts.length>1?'选择':''}}赠品<text class="icox icox-close pull-right"></text>
+				</view>
+				<view class="gift-list-group">
+					<block wx:for="{{goods.gifts}}" wx:for-item="item" wx:for-index="index" >
+						<view class="gift-list">
+							<block wx:if="{{goods.gifts.length>1&&item.canchose==1}}">								<label bindtap="radioChange" class="radio" data-giftgoodsid="{{item.id}}" data-title="{{item.title}}">
+									<radio checked="" color="red" value="{{item.id}}"></radio>{{item.title}}								</label>
+							</block>
+							<block wx:if="{{goods.gifts.length>1&&item.canchose==0}}">								<label class="radio">{{item.title}}</label>
+							</block>
+							<block wx:for="{{item.gift}}" wx:for-item="val" wx:for-index="index" >
+								<navigator url="/pages/goods/detail/index?id={{val.id}}">
+									<view class="fui-list" style="background: #f9f9f9">
+										<block wx:if="{{val.total==0}}">
+											<view class="sold-out-gift">已售罄</view>
+										</block>
+										<view class="fui-list-media">
+											<image src="{{val.thumb}}"></image>
+										</view>
+										<view class="fui-list-inner">
+											<view class="subtitle">{{val.title}}</view>
+											<view class="row">
+												<view class="row-text">{{val.marketprice}}</view>
+											</view>
+										</view>
+									</view>
+								</navigator>
+							</block>
+						</view>
+					</block>
+				</view>
+			</view>
+		</radio-group>
+		<view bindtap="emptyActive" class="fui-navbar">
+			<view class="nav-item btn" style="background:#ff5555">确定</view>
+		</view>
+	</view>
+</view>

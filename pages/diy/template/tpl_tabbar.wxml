@@ -1,0 +1,41 @@
+<!--   time:2019-04-21 23:06:41 -->
+<block wx:if="{{diyitem.id=='tabbar'&&diyitem.style.showtype=='1'}}">
+	<view class="fui-tabbar style1">
+		<block wx:for="{{diyitem.data}}" wx:key="index" wx:for-item="items" wx:for-index="index" >
+			<block wx:if="{{(diyitem.status==null||diyitem.status=='')||!diyitem.status}}">
+				<view bindtap="tabwidget" class="item" data-id="{{diyitemid}}" data-type="{{index}}" data-url="{{items.linkurl}}" style="{{diyitem.data.length<=4?'flex: 1;':'flex-shrink:0;'}}{{index==0?'color:'+diyitem.style.activecolor+';background:'+diyitem.style.activebackground+';border-color:'+diyitem.style.activecolor:'color:'+diyitem.style.color+';background:'+diyitem.style.background}}">{{items.text||'选项'}}</view>
+			</block>
+			<block wx:if="{{diyitem.status}}">
+				<view bindtap="tabwidget" class="item" data-id="{{diyitemid}}" data-type="{{index}}" data-url="{{items.linkurl}}" style="{{diyitem.data.length<=4?'flex: 1;':'flex-shrink:0;'}}{{diyitem.status==index?'color:'+diyitem.style.activecolor+';background:'+diyitem.style.activebackground+';border-color:'+diyitem.style.activecolor:'color:'+diyitem.style.color+';background:'+diyitem.style.background}}">{{items.text||'选项'}}</view>
+			</block>
+		</block>
+	</view>
+</block>
+<block wx:if="{{diyitem.id=='tabbar'&&diyitem.style.showtype=='2'}}">
+	<view class="fui-tabbar style2">
+		<block wx:for="{{diyitem.data}}" wx:key="index" wx:for-item="items" wx:for-index="index" >
+			<block wx:if="{{(diyitem.status==null||diyitem.status=='')||!diyitem.status}}">
+				<view bindtap="tabwidget" class="item" data-id="{{diyitemid}}" data-type="{{index}}" data-url="{{items.linkurl}}" style="{{diyitem.data.length<=4?'flex: 1;':'flex-shrink:0;'}}{{index==0?'color:'+diyitem.style.activecolor+';background:'+diyitem.style.activebackground+';border-color:'+diyitem.style.activecolor:'color:'+diyitem.style.color+';background:'+diyitem.style.background}}">{{items.text||'选项'}}</view>
+			</block>
+			<block wx:if="{{diyitem.status}}">
+				<view bindtap="tabwidget" class="item" data-id="{{diyitemid}}" data-type="{{index}}" data-url="{{items.linkurl}}" style="{{diyitem.data.length<=4?'flex: 1;':'flex-shrink:0;'}}{{diyitem.status==index?'color:'+diyitem.style.activecolor+';background:'+diyitem.style.activebackground+';border-color:'+diyitem.style.activecolor:'color:'+diyitem.style.color+';background:'+diyitem.style.background}}">{{items.text||'选项'}}</view>
+			</block>
+		</block>
+	</view>
+</block>
+<block wx:for="{{diyitem.data}}" wx:key="index" wx:for-item="items" wx:for-index="index" >
+	<block wx:if="{{diyitem.status==''||diyitem.status==null}}" >
+		<view>
+			<block wx:if="{{index==0}}">
+				<include src="/pages/diy/template/tpl_tabbarlist.wxml" />
+			</block>
+		</view>
+	</block>
+	<block wx:else>
+		<view>
+			<block wx:if="{{diyitem.status==index}}">
+				<include src="/pages/diy/template/tpl_tabbarlist.wxml" />
+			</block>
+		</view>
+	</block>
+</block>

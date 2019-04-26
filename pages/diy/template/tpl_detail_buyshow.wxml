@@ -1,0 +1,7 @@
+<!--   time:2019-04-21 23:06:40 -->
+<block wx:if="{{goods.buycontentshow>0}}">	<view class="fui-cell-group">
+		<view class="fui-cell">
+			<template  data="{{wxParseData:wxParseData_buycontent.nodes}}" is="wxParse" />
+		</view>
+	</view>
+</block>

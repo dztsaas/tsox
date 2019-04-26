@@ -1,0 +1,2 @@
+<!--   time:2019-04-21 23:06:41 -->
+<rich-text bindtap="tap" nodes="{{diyitem.params.content}}" style="background:{{diyitem.style.background}};padding:{{diyitem.style.padding==0?0:diyitem.style.padding+'rpx'}} {{diyitem.style.padding==0?0:diyitem.style.padding+'rpx'}};display:block"></rich-text>

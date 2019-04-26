@@ -1,0 +1,5 @@
+<!--   time:2019-04-21 23:06:36 -->
+<import  src="/utils/wxParse/wxParse.wxml"  />
+<view class="wxParse" style="width: 100%;{{copyright.bgcolor?'background: '+copyright.bgcolor:''}}">
+	<template  data="{{wxParseData:wxParseData.nodes}}" is="wxParse" />
+</view>

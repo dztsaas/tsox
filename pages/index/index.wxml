@@ -1,0 +1,189 @@
+<!--   time:2019-04-21 23:06:42 -->
+<include src="/pages/index/adver.wxml" />
+<block wx:if="{{loading}}" >
+	<loading>加载中...</loading>
+</block>
+<block wx:else>
+	<view class="page" style="height:auto;background:{{diypages.page.background}}">
+		<include src="/pages/index/coupontips.wxml" />
+		<block wx:if="{{diypages}}" >
+			<view style="min-height:100%;height:100%;">
+				<block wx:if="{{diypages.page.type==2}}">
+					<view>
+						<include src="/pages/diy/index.wxml" />
+					</view>
+				</block>
+				<block wx:if="{{diypages.page.type==20}}">
+					<include src="/pages/custom/index.wxml" />
+				</block>
+			</view>
+		</block>
+		<block wx:else>
+			<view>
+				<block wx:for="{{shop.sorts}}" wx:for-item="item" wx:for-index="idx" >
+					<block wx:if="{{item.visible==1}}">
+						<block wx:if="{{item.type=='adv'}}">
+							<include src="/pages/index/adv.wxml" />
+						</block>
+						<block wx:if="{{item.type=='search'}}">
+							<include src="/pages/index/search.wxml" />
+						</block>
+						<block wx:if="{{item.type=='notice'}}">
+							<include src="/pages/index/notice.wxml" />
+						</block>
+						<block wx:if="{{item.type=='banner'}}">
+							<include src="/pages/index/banner.wxml" />
+						</block>
+						<block wx:if="{{item.type=='cube'}}">
+							<include src="/pages/index/cube.wxml" />
+						</block>
+						<block wx:if="{{item.type=='nav'}}">
+							<include src="/pages/index/nav.wxml" />
+						</block>
+						<block wx:if="{{item.type=='recommand'}}">
+							<include src="/pages/index/recommand.wxml" />
+						</block>
+					</block>
+				</block>
+				<block wx:if="{{storeRecommand}}">
+					<view id="recommand">
+						<view class="fui-line" style="background: #f4f4f4;">
+							<view class="text text-danger">
+								<text class="icox icox-hotfill"></text>店铺推荐							</view>
+						</view>
+						<view class="fui-goods-group block border">
+							<block wx:for="{{storeRecommand}}" wx:for-item="item" wx:for-index="idx" >
+								<template  data="{{item:item}}" is="tpl_list" />
+							</block>
+						</view>
+					</view>
+				</block>
+				<block wx:if="{{loading}}">
+					<view class="fui-loading">
+						<view class="icon"></view>
+						<view class="text">正在加载</view>
+					</view>
+				</block>
+				<block wx:if="{{storeRecommand.length==total&&total>0}}">					<view class="fui-loading empty">
+						<view class="text">没有更多了</view>
+					</view>
+				</block>
+				<include src="/pages/common/copyright.wxml" />
+			</view>
+		</block>
+		<view class="fui-toast {{FoxUIToast.show?'in':'out'}}">
+			<view class="text">{{FoxUIToast.text}}</view>
+		</view>
+		<view bindtap="emptyActive" class="nav-mask" style="{{active?'display:block':''}}"></view>
+		<view class="{{unpaid?'':'shut'}}" id="unpaid" style="{{unpaidhide?'display:none':''}}">
+			<view class="unpaid-alert">
+				<view class="unpaid-title">您有一个订单待支付</view>
+				<view class="unpaid-subtitle">未支付的订单将在不久之后自动关闭，请尽快支付哦！</view>
+				<view class="unpaid-content fui-list-group">
+					<block wx:for="{{nopaygoods}}" wx:for-item="item" wx:for-index="index" >
+						<navigator class="fui-list" openType="navigate" url="/pages/goods/detail/index?id={{item.id}}">
+							<view class="fui-list-media img-media">
+								<view id="btn-pay">
+									<image class="" src="{{item.thumb}}"></image>
+								</view>
+							</view>
+							<view class="fui-list-inner">
+								<view id="btn-pay">
+									<view class="subtitle">{{item.title}}</view>
+								</view>
+								<view class="price">
+									<span class="bigprice text-danger">￥<span class="marketprice">{{item.marketprice}}</span>
+									</span>
+									<span style="float:right;color:#999;font-size:24rpx">x {{item.totals}}</span>
+								</view>
+							</view>
+						</navigator>
+					</block>
+					<block wx:if="{{nopaygoodstotal>3}}">						<view class="fui-list">等多件商品</view>
+					</block>
+				</view>
+				<navigator bindtap="unpaidcolse2" class=" btn btn-danger disable block" id="btn-pay" openType="navigate" url="/pages/order/detail/index?id={{nopayorder.id}}">立即支付<span style="font-size:26rpx;margin-left:20rpx">(合计:￥{{nopayorder.price}})</span>
+				</navigator>
+				<i bindtap="unpaidcolse" class="icox icox-guanbi1" id="unpaid-colse" style="font-size:60rpx;color:#fff;position: absolute;top:105%;left:46%"></i>
+			</view>
+		</view>
+		<block wx:if="{{customer==1}}">
+			<button class="suspended-service" openType="contact" sessionFrom="weapp" showMessageCard="true" style="background-color:{{customercolor}}">
+				<text class="icox icox-customerservice"></text>
+			</button>
+		</block>
+		<block wx:if="{{phone==1}}">
+			<view bindtap="phone" class="phone" style="background-color:{{phonecolor}}">
+				<text class="icox icox-dianhua"></text>
+			</view>
+		</block>
+		<include src="/pages/common/goods-picker.wxml" />
+		<include src="/pages/common/city-picker.wxml" />
+	</view>
+</block>
+<block wx:if="{{modelShow}}">
+	<view class="model">
+		<view class="inner">
+			<view class="title">用户未授权</view>
+			<view class="image">
+				<image src="{{imgUrl+'plugin/app/static/images/wxapp/shouquan.png'}}"></image>
+			</view>
+			<view class="subtitle">您需要先开启【用户信息】，才能使用此功能哦~</view>
+			<view class="model-btns">
+				<view bindtap="cancelclick" class="cancel">取消</view>
+				<view bindtap="confirmclick" class="confirm">去设置</view>
+			</view>
+		</view>
+	</view>
+</block>
+<block wx:if="{{showcoupon}}">
+	<view class="shoucoupon">
+		<image src=" {{imgUrl+'/coupon/bg1.png'}}" style="position: absolute; width: 620rpx;height: 820rpx;top: 130rpx;left: 50%;margin-left: -310rpx;"></image>
+		<view class="inner">
+			<view class="title">新人礼包</view>
+			<view class="subtitle">数量有限，先到先得哦</view>
+			<scroll-view class="coupon-list" scrollY="true">
+				<block wx:for="{{cpinfos}}" wx:for-item="item" wx:for-index="index" >
+					<view class="item">
+						<view class="item-cell">
+							<view class="item-inner">
+								<view class="t">{{item.couponname}}</view>
+								<view class="b">{{item.enoughtext}}</view>
+							</view>
+							<view class="item-remark">{{item.t2}}<span style="font-size:30rpx;">{{item.t1}}</span>
+							</view>
+						</view>
+						<view class="indate">{{item.timelimittext}}</view>
+					</view>
+				</block>
+			</scroll-view>
+			<view bindtap="closecoupon" class="know">知道了</view>
+		</view>
+		<view class="closecoupon">
+			<i bindtap="closecoupon" class="icox icox-guanbi-copy"></i>
+		</view>
+	</view>
+</block>
+<!--   tpl_list    -->
+<template name="tpl_list">
+		<view class="fui-goods-item" data-goodsid="{{item.id}}" data-type="{{item.type}}">
+			<navigator openType="navigate" url="{{item.bargain>0?'/pages/bargain/detail/detail?id='+item.bargain:'/pages/goods/detail/index?id='+item.id}}">				<view class="image" style="background-image:url('{{item.thumb}}');">
+					<block wx:if="{{item.total<=0}}">
+						<view class="salez" style="background-image: url('{php echo tomedia($_W['shopset']['shop']['saleout'])}'); "></view>
+					</block>
+				</view>
+			</navigator>
+			<view class="detail">
+				<navigator openType="navigate" url="{{item.bargain>0?'/pages/bargain/detail/detail?id='+item.bargain:'/pages/goods/detail/index?id='+item.id}}">					<view class="name">
+						<block wx:if="{{item.bargain>0}}">							<image class="bargain_label" src="/static/images/label.png"></image>
+						</block>
+						<block wx:if="{{item.ispresell==1}}">
+							<text class="fui-tag fui-tag-danger">预售</text>
+						</block>{{item.title}}					</view>
+				</navigator>
+				<view class="index_price price">
+					<text class="text">¥{{item.minprice}}</text>
+				</view>
+			</view>
+		</view>
+	</template>
